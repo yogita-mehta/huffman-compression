@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 220 10% 92%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 220 10% 92%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 220 10% 92%;
+
+    --primary: 175 70% 45%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 220 10% 85%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 175 70% 45%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 150 70% 45%;
+    --success-foreground: 150 70% 10%;
+
+    --warning: 45 90% 50%;
+    --warning-foreground: 45 90% 10%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 15%;
+    --ring: 175 70% 45%;
+
+    --radius: 0.75rem;
+
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --sidebar-background: 220 18% 8%;
+    --sidebar-foreground: 220 10% 85%;
+    --sidebar-primary: 175 70% 45%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 220 10% 85%;
+    --sidebar-border: 220 15% 15%;
+    --sidebar-ring: 175 70% 45%;
+
+    /* Custom tokens */
+    --glow-primary: 0 0 40px hsl(175 70% 45% / 0.15);
+    --glow-success: 0 0 40px hsl(150 70% 45% / 0.15);
+    --gradient-surface: linear-gradient(135deg, hsl(220 18% 12%) 0%, hsl(220 18% 8%) 100%);
+    --gradient-border: linear-gradient(135deg, hsl(220 15% 25%) 0%, hsl(220 15% 15%) 100%);
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 220 10% 92%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--glow-primary);
+  }
+
+  .glass-card-success {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--glow-success);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-[hsl(150_70%_45%)] bg-clip-text text-transparent;
+  }
+
+  .metric-value {
+    @apply font-mono text-3xl font-bold tracking-tight;
+  }
+
+  .metric-label {
+    @apply text-sm text-muted-foreground uppercase tracking-wider;
+  }
+
+  .upload-zone {
+    @apply relative border-2 border-dashed border-border/60 rounded-xl p-12 transition-all duration-300;
+    @apply hover:border-primary/50 hover:bg-primary/5;
+  }
+
+  .upload-zone-active {
+    @apply border-primary bg-primary/10;
+    box-shadow: var(--glow-primary);
+  }
+
+  .tree-node {
+    @apply bg-card border border-border rounded-lg px-3 py-2 font-mono text-sm;
+    @apply transition-all duration-200 hover:border-primary/50;
+  }
+
+  .tree-edge {
+    @apply stroke-muted-foreground stroke-2;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(175 70% 45% / 0.1);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(175 70% 45% / 0.25);
+    }
+  }
+}
