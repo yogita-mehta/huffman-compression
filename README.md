@@ -1,74 +1,81 @@
-# React + TypeScript + Vite
+# Huffman File Compression Utility
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lossless file compression and decompression utility implemented using the **Huffman Coding** algorithm in **TypeScript**.
 
-Currently, two official plugins are available:
+This project demonstrates how classical data-structure algorithms can be applied in modern programming languages to efficiently reduce file size.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Overview
 
-## React Compiler
+**Huffman Coding** is a greedy compression algorithm that assigns shorter binary codes to more frequent characters and longer codes to less frequent ones.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This implementation:
+- Reads a text file
+- Compresses it using Huffman Encoding
+- Stores encoded binary data
+- Decompresses it back to the original file **without any data loss**
 
-## Expanding the ESLint configuration
+## ⚙️ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Lossless compression and decompression
+- File-based input and output
+- Huffman Tree construction using priority queue
+- Binary encoding and decoding
+- Visualization of Huffman Tree for better understanding and debugging
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧠 Algorithm Explanation (Brief)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Count frequency of each character in the input file
+2. Build a **min-heap (priority queue)** using character frequencies
+3. Construct a **Huffman Tree** by merging lowest-frequency nodes
+4. Generate **prefix-free binary codes** for each character
+5. Encode the input file using generated codes
+6. Decode the compressed file using the same Huffman Tree
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🗂️ Project Structure
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+src/
+├── huffman.ts # Huffman tree construction and logic
+├── compress.ts # File compression logic
+├── decompress.ts # File decompression logic
+├── utils.ts # Helper functions
+sample.txt # Example input file
 ```
-# Huffman Compression
+## ▶️ How to Run
+
+### 1. Install dependencies
+npm install
+
+### 2. Compress a file
+npm run compress sample.txt
+
+
+### 3. Decompress the file
+npm run decompress sample.huff
+
+
+## 📊 Example
+
+| File | Original Size | Compressed Size | Compression Ratio |
+|------|---------------|-----------------|-------------------|
+| `sample.txt` | 12 KB | ~6–7 KB | ~45–55% |
+
+**Decompressed output exactly matches the original file.**
+
+## ⏱️ Time & Space Complexity
+
+| Operation | Time Complexity | Space Complexity |
+|-----------|-----------------|------------------|
+| Building Huffman Tree | O(n log n) | O(n) |
+| Encoding | O(n) | O(n) |
+| Decoding | O(n) | O(n) |
+
+*where `n` is the number of unique characters*
+
+## 🚀 Future Improvements
+
+- Support for **binary and non-text files**
+- Better compression for **large datasets**
+- **Streaming compression support**
+
+---
+
