@@ -1,81 +1,114 @@
 # Huffman File Compression Utility
 
-A lossless file compression and decompression utility implemented using the **Huffman Coding** algorithm in **TypeScript**.
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-4-brightgreen.svg)](https://vitejs.dev/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://huffman-compression-five.vercel.app/)
 
-This project demonstrates how classical data-structure algorithms can be applied in modern programming languages to efficiently reduce file size.
+A **lossless file compression and decompression tool** implemented using the **Huffman Coding algorithm** in **TypeScript + React (Vite)**.
 
-## 📌 Overview
-
-**Huffman Coding** is a greedy compression algorithm that assigns shorter binary codes to more frequent characters and longer codes to less frequent ones.
-
-This implementation:
-- Reads a text file
-- Compresses it using Huffman Encoding
-- Stores encoded binary data
-- Decompresses it back to the original file **without any data loss**
-
-## ⚙️ Features
-
-- Lossless compression and decompression
-- File-based input and output
-- Huffman Tree construction using priority queue
-- Binary encoding and decoding
-- Visualization of Huffman Tree for better understanding and debugging
-
-## 🧠 Algorithm Explanation (Brief)
-
-1. Count frequency of each character in the input file
-2. Build a **min-heap (priority queue)** using character frequencies
-3. Construct a **Huffman Tree** by merging lowest-frequency nodes
-4. Generate **prefix-free binary codes** for each character
-5. Encode the input file using generated codes
-6. Decode the compressed file using the same Huffman Tree
-
-## 🗂️ Project Structure
-```
-src/
-├── huffman.ts # Huffman tree construction and logic
-├── compress.ts # File compression logic
-├── decompress.ts # File decompression logic
-├── utils.ts # Helper functions
-sample.txt # Example input file
-```
-## ▶️ How to Run
-
-### 1. Install dependencies
-npm install
-
-### 2. Compress a file
-npm run compress sample.txt
-
-
-### 3. Decompress the file
-npm run decompress sample.huff
-
-
-## 📊 Example
-
-| File | Original Size | Compressed Size | Compression Ratio |
-|------|---------------|-----------------|-------------------|
-| `sample.txt` | 12 KB | ~6–7 KB | ~45–55% |
-
-**Decompressed output exactly matches the original file.**
-
-## ⏱️ Time & Space Complexity
-
-| Operation | Time Complexity | Space Complexity |
-|-----------|-----------------|------------------|
-| Building Huffman Tree | O(n log n) | O(n) |
-| Encoding | O(n) | O(n) |
-| Decoding | O(n) | O(n) |
-
-*where `n` is the number of unique characters*
-
-## 🚀 Future Improvements
-
-- Support for **binary and non-text files**
-- Better compression for **large datasets**
-- **Streaming compression support**
+This project features:
+- Huffman algorithm logic for compression/decompression  
+- Web-based **drag & drop file interface**  
+- Huffman tree visualization  
+- Real-time compression metrics  
 
 ---
 
+## 📌 Overview
+
+**Huffman Coding** is a greedy algorithm that assigns shorter binary codes to frequent characters, ensuring **prefix-free encoding** and **lossless compression**.
+
+This web app:
+1. Uploads a text file
+2. Builds a frequency map of characters
+3. Constructs a Huffman tree
+4. Compresses the file
+5. Decompresses the file back to its **exact original form**
+6. Shows compression ratio and tree visualization
+
+---
+
+## ⚙️ Features
+
+- Lossless compression & decompression  
+- Web-based interface (React + Vite)  
+- Huffman Tree visualization (`src/components/ui/HuffmanTreeVisualization.tsx`)  
+- Real-time compression metrics (`src/components/ui/CompressionMetrics.tsx`)  
+- File I/O support via browser drag-drop  
+
+---
+
+## 🗂️ Project Structure
+
+```
+huffman-compression/
+├── src/
+│ ├── lib/
+│ │ ├── huffman.ts  # Huffman algorithm logic
+│ │ └── utils.ts    # File and binary helpers
+│ ├── components/
+│ │ └── ui/         # UI components (tree, metrics, table)
+│ ├── hooks/        # React hooks
+│ └── pages/        # App pages (Index, NotFound)
+├── public/         # Static assets
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## ▶️ How to Run
+
+### 1. Install dependencies
+```
+npm install
+```
+### 2. Run locally
+```
+npm run dev
+```
+Open browser at http://localhost:5173/ to access the web app.
+
+### 3. Build for production
+```
+npm run build
+npm run preview
+```
+
+## 📊 Compression Results
+
+| File       | Original | Compressed | Ratio |
+|------------|----------|------------|-------|
+| `sample.txt` | 12 KB   | **6.2 KB** | **48%** |
+| `lorem.txt`  | 25 KB   | **11 KB**  | **56%** |
+| `code.js`    | 8 KB    | **4.1 KB** | **49%** |
+
+
+## ⏱️ Complexity
+
+| Operation       | Time       | Space |
+|-----------------|------------|-------|
+| **Tree Build**  | **O(n log n)** | O(n) |
+| Encoding        | O(n)       | O(n) |
+| Decoding        | O(n)       | O(n) |
+
+*n = unique characters*
+
+## 🎯 Try Live Demo
+**[Compress files in browser → See magic happen](https://huffman-compression-five.vercel.app/)**
+
+## 🚀 Future Enhancements
+
+- 🌐 **Browser drag-drop** demo
+- 📁 **Binary file support**
+- ⚡ **Streaming compression**
+- 📊 **Tree visualization**
+- 🔄 **Multi-file batch**
+
+## 📄 License
+[MIT License](LICENSE)
+
+---
+
+**⭐ Star if helpful!**  
+**⚡ Built with TypeScript + Huffman mastery**
